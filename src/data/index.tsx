@@ -424,9 +424,9 @@ export const questions: isQuestion[] = [
           </Link>
         </p>
         <p>
-          Its worth noting that <code>Preact</code> has noteworthy popularity
-          but I consider it closely related to the <code>React</code> ecosystem
-          considering their shared API.
+          Its worth mentioning that <code>Preact</code> has noteworthy
+          popularity but I consider it closely related to the <code>React</code>{" "}
+          ecosystem considering their shared API.
         </p>
         <p>
           Additionally, <code>Angular</code> popularity continues to decline
@@ -441,47 +441,572 @@ export const questions: isQuestion[] = [
     question:
       "When would you choose to use Edge Functions, Serverless Functions, or Edge Middleware with Vercel?",
     summary: "Choosing functions and middleware",
-    answer: <p>Answer content 4</p>,
+    answer: (
+      <>
+        <p>
+          These compute options have their own pros and cons, even if you may be
+          able to achieve similar functionality with each.
+        </p>
+        <h3>What are they?</h3>
+        <h4>Serverless Functions</h4>
+        <ul>
+          <li>
+            Essentially a <code>lambda</code>
+            <ul>
+              <li>
+                Reduces infrastructure management overhead because teams no
+                longer need to manage a server
+              </li>
+              <li>Allows for dynamic scaling</li>
+              <li>
+                Supports a variety of runtimes including community ones like{" "}
+                <code>Deno</code>
+              </li>
+            </ul>
+          </li>
+          <li>Runs in a specific region</li>
+        </ul>
+        <h4>Edge Functions</h4>
+        <ul>
+          <li>
+            Same as a <code>Serverless Function</code> except it runs on a CND
+            edge node across many regions
+          </li>
+          <li>Reduces latency by selecting the closest node to the user</li>
+        </ul>
+        <h4>Edge Middleware</h4>
+        <ul>
+          <li>
+            Similar to an <code>Edge Function</code> except that it{" "}
+            <b>runs before requests are processed</b> by the site.
+          </li>
+          <li>
+            Helps with different use cases like redirects or A/B testing where
+            we want to send the user's request to a different release of the
+            site.
+          </li>
+        </ul>
+        <h3>How do I choose?</h3>
+        <p>
+          It depends on which stage of the request lifecycle we want to execute
+          our function as well as location specific performance needs.
+        </p>
+        <p>
+          With <code>Edge Middleware</code> we could dynamically and
+          dramatically personalize the user's experience by swapping out major
+          portions of the application or directing them to completely different
+          deployments.
+        </p>
+        <p>
+          Both <code>Serverless</code> and <code>Edge</code> functions could get
+          the job done but its important to consider which is most appropriate
+          for your use case and your users locations.
+        </p>
+        <p>
+          If you're curious... here's a helpful diagram I stole from the Vercel
+          docs 😁
+        </p>
+        <Image
+          src="/vercel-infra-overview.png"
+          alt="Edge Middleware location within Vercel infrastructure."
+          width={960}
+          height={350}
+          className="w-full"
+        />
+        <p className="text-xs text-gray-500">
+          Source{" "}
+          <Link
+            href="https://vercel.com/docs/concepts/functions/edge-middleware"
+            target="_blank"
+          >
+            Edge Middleware Overview
+          </Link>
+        </p>
+        <h4>A note on cache</h4>
+        <p>
+          Its hard to talk about the Edge without mentioning caching. One of the
+          reasons why Vercel hosted apps feel so snappy is thanks to{" "}
+          <code>Edge Network Caching</code> enabled by default for many types of
+          projects.
+        </p>
+      </>
+    ),
   },
   {
     id: 5,
     question:
       "Imagine a customer writes in requesting help with a build issue on a framework or technology that you've not seen before. How would you go about troubleshooting this and what questions would you ask the customer to understand the situation better?",
     summary: "Troubleshooting build issues",
-    answer: <p>Answer content 5</p>,
+    answer: (
+      <ol>
+        <li>
+          Gather context
+          <ul>
+            <li>Read their message in detail</li>
+            <li>
+              Read their build logs and start making notes on the nature of the
+              error
+            </li>
+            <li>
+              Check their deployment history to see if there's an earlier
+              release which was working
+            </li>
+            <li>Read the framework docs</li>
+          </ul>
+        </li>
+        <li>
+          Compile notes and write questions for the customer to uncover
+          potentially missing details. For example:
+          <ul>
+            <li>
+              If I can't access their repository, request access to reverse
+              engineer and understand details like their{" "}
+              <code>package.json</code>
+            </li>
+            <li>
+              If the issue is to do with a dependency, ask them to confirm the
+              version of the dependency that they need and whether they could
+              consider different versions
+            </li>
+            <li>
+              If the issue is to do with environment variables, ask them if
+              they've been able to test this with a local build using the same
+              credentials or potentially generate new credentials
+            </li>
+          </ul>
+        </li>
+        <li>
+          Read more with the additional context and hopefully after narrowing
+          the scope of the issue
+          <ul>
+            <li>
+              See if there are any issues in the framework's repo that match the
+              build error messages
+            </li>
+            <li>
+              Look for similar build errors from other frameworks if there are
+              no relevant issues
+            </li>
+            <li>
+              Check recent release notes for any key dependencies, especially if
+              there have been recent major releases
+            </li>
+            <li>
+              Query existing resolved cases for similar issues from other
+              customers
+            </li>
+          </ul>
+        </li>
+        <li>
+          Attempt to recreate the issue
+          <ul>
+            <li>
+              If this is a truly new framework, potentially spin up a simple
+              proof-of-concept (POC) project and see if I'm able to deploy it
+              successfully
+            </li>
+            <li>
+              If they've configured their repo in a unique way, see if I can
+              produce the same issues on the POC or see what happens when we
+              adjust their config to be more standard
+            </li>
+          </ul>
+        </li>
+      </ol>
+    ),
   },
   {
     id: 6,
     question:
       "The customer from question 5 replies to your response with the below:\n“I’m so frustrated. I’ve been trying to make this work for hours and I just can’t figure it out. It must be a platform issue so why don't you just fix it for me instead of asking me questions.”\nPlease write a follow-up reply to the customer.",
     summary: "Follow-up reply to frustrated customer",
-    answer: <p>Answer content 6</p>,
+    answer: (
+      <>
+        <p>
+          Hi <code>FirstName</code>,
+        </p>
+        <p>
+          I understand this is a frustrating situation and I'd like to help get
+          your project up and running as quickly as possible.
+        </p>
+        <p>
+          If you're able to answer some of the previous questions or supply
+          additional context it would be greatly appreciated. We could also book
+          a short call to go through this together while screen sharing if
+          that's easier.
+        </p>
+        <p>
+          Based on our initial investigation it looks like this issue has
+          something to do with the project's configuration, specifically the
+          build step.
+        </p>
+        <p>
+          It looks like this problem first appeared after the deployment on{" "}
+          <code>DateTime</code> so if you're under time pressure you could
+          consider rolling back to the previous release and implementing your
+          changes on a separate branch.
+        </p>
+        <p>
+          I attempted to deploy a fresh project using the same framework. This
+          deployment went through successfully and you can see my config here:{" "}
+          <code>link-to-config</code>
+        </p>
+        <p>
+          Please let me know if you have any other questions or clarifications.
+          I'd be happy to help.
+        </p>
+        <p>
+          Thanks,
+          <br />
+          Aldo
+        </p>
+      </>
+    ),
   },
   {
     id: 7,
     question:
       "A customer has a project on Vercel and they want to redirect the /blog path to another website. Please write a reply to the customer. Separately, list any relevant documentation you found and any feedback or information you’d like to share about your decision-making process.",
     summary: "Handling URL redirection for a customer project",
-    answer: <p>Answer content 7</p>,
+    answer: (
+      <>
+        <p>
+          Hi <code>FirstName</code>,
+        </p>
+        <p>
+          Thanks for reaching out. I'd be happy to help you set up redirects for
+          your blog.
+        </p>
+        <p>
+          If you're using Next.js you can configure redirects in the{" "}
+          <code>next.config.js</code> file, otherwise you can use a{" "}
+          <code>vercel.json</code> config file in the root of your project
+          directory.
+        </p>
+        <p>Here's an example of how to achieve this in Next.js</p>
+        <pre>
+          {`// next.config.js
+module.exports = {
+  async redirects() {
+    return [
+      {
+        source: "/blog",
+        destination: "https://my-new-blog.vercel.app",
+        permanent: true,
+      },
+    ];
+  },
+};
+`}
+        </pre>
+        <p>
+          You can read more about this in the{" "}
+          <Link
+            href="https://nextjs.org/docs/pages/api-reference/next-config-js/redirects"
+            target="_blank"
+          >
+            Next.js documentation
+          </Link>
+        </p>
+        <p>
+          And here's the same example using <code>vercel.json</code> for other
+          frameworks
+        </p>
+        <pre>
+          {`// vercel.json
+{
+  "redirects": [
+    {
+      "source": "/blog",
+      "destination": "https://my-new-blog.vercel.app",
+      "permanent": true,
+    }
+  ]
+}`}
+        </pre>
+        <p>
+          You can read more about this in the{" "}
+          <Link
+            href="https://vercel.com/docs/concepts/projects/project-configuration#redirects"
+            target="_blank"
+          >
+            Vercel config redirect documentation
+          </Link>
+        </p>
+        <p>
+          If you're only redirecting traffic temporarily consider changing the{" "}
+          <code>permanent</code> attribute to <code>false</code>.
+        </p>
+        <p>
+          Please note that by default, all query strings that are found in the
+          source path will be passed to the destination path. For example if
+          someone goes to:
+        </p>
+        <pre>
+          {`https://my-website.vercel.app/blog/my-post-title?utm_source=google`}
+        </pre>
+        <p>They will be redirected to:</p>
+        <pre>
+          {`https://my-new-blog.vercel.app/my-post-title?utm_source=google`}
+        </pre>
+        <p>
+          There's more information on this available in our guides:{" "}
+          <Link
+            href="https://vercel.com/guides/how-do-i-perform-vercel-redirects-based-on-query-strings"
+            target="_blank"
+          >
+            How do I perform Vercel redirects based on query strings?
+          </Link>
+        </p>
+        <p>
+          Finally, there are more redirect options available leveraging our{" "}
+          <code>Edge Functions</code> or <code>Edge Middleware</code> features.{" "}
+          <Link
+            href="https://vercel.com/docs/concepts/edge-network/redirects"
+            target="_blank"
+          >
+            You can read more about this in our documentation.
+          </Link>
+          .
+        </p>
+        <p>
+          Thanks,
+          <br />
+          Aldo
+        </p>
+      </>
+    ),
   },
   {
     id: 8,
     question:
       "A customer is creating a site and would like their project not to be indexed by search engines. Please write a reply to the customer. Separately, list any relevant documentation you found and any feedback or information you’d like to share about your decision-making process.",
     summary: "Preventing search engine indexing",
-    answer: <p>Answer content 8</p>,
+    answer: (
+      <>
+        <p>
+          Hi <code>FirstName</code>,
+        </p>
+        <p>
+          Thanks for reaching out, that's a great question. I'd be happy to help
+          you prevent your project from being indexed by search engines.
+        </p>
+        <p>
+          We should be able to achieve this by modifying the{" "}
+          <code>X-Robots-Tag</code> in the website's response headers.
+        </p>
+        <p>
+          If you're using a framework like Next.js its best to use the{" "}
+          <code>next.config.js</code> file. Here's an example:
+        </p>
+        <pre>
+          {`// next.config.js
+module.exports = {
+  async headers() {
+    const headers = [];
+    if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') {
+      headers.push({
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex',
+          },
+        ],
+        source: '/:path*',
+      });
+    }
+    return headers;
+  },
+ };`}
+        </pre>
+        <p>
+          Alternatively, This can be set up in the <code>vercel.json</code> file
+          in the root of your project directory. However, please note that using
+          your framework's built-in methods to inject headers is always
+          recommended and doing so through <code>vercel.json</code> should only
+          be as a last resort and may lead to other problems.
+        </p>
+        <p>
+          This is what your <code>vercel.json</code> could look like. You will
+          need to replace <code>example.com</code> with your own domain name.
+        </p>
+        <pre>
+          {`{
+  "headers": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "example.com"
+        }
+      ],
+      "headers" : [
+        {
+          "key" : "X-Robots-Tag",
+          "value" : "noindex"
+        }
+      ]
+    }
+  ]
+}`}
+        </pre>
+        <p>
+          You can read more about how to configure the <code>header</code>{" "}
+          object in{" "}
+          <Link
+            href="https://vercel.com/docs/concepts/projects/project-configuration#headers"
+            target="_blank"
+          >
+            our documentation here
+          </Link>
+          .
+        </p>
+        <p>
+          Once you've deployed your changes you can test if it worked using{" "}
+          <code>curl</code> in your terminal like this:
+        </p>
+        <pre>{`curl -Is https://vercel.com | grep -q 'x-robots-tag' && echo "✅ Indexing successfully disabled! Found x-robots-tag" || echo "❌ Indexing is still active! x-robots-tag not found"`}</pre>
+        <p>
+          If you don't have <code>curl</code> installed you can also check in
+          the browser's dev tools under the <code>Network</code> tab.
+        </p>
+        <p>
+          In Chrome you can find this by right clicking anywhere on the page and
+          selecting <code>Inspect</code> and then navigating to{" "}
+          <code>Network</code>, selecting <code>All</code> and then clicking on
+          the first item in the list of loaded content. There should be a{" "}
+          <code>Headers</code> tab where you can see{" "}
+          <code>Request Headers</code>.
+        </p>
+        <p>
+          You can read more about search engine indexing in our guides:{" "}
+          <Link
+            href="https://vercel.com/guides/are-vercel-preview-deployment-indexed-by-search-engines#x-robots-tag-header"
+            target="_blank"
+          >
+            Are Vercel Preview Deployments indexed by search engines?
+          </Link>
+        </p>
+        <p>Feel free to send me a reply if you have any further questions.</p>
+        <p>
+          Thanks,
+          <br />
+          Aldo
+        </p>
+      </>
+    ),
   },
   {
     id: 9,
     question:
       "What do you think is one of the most common problems which customers ask Vercel for help with? How would you help customers to overcome common problems, short-term and long-term?",
     summary: "Handling common customer problems",
-    answer: <p>Answer content 9</p>,
+    answer: (
+      <>
+        <h4>Where's the complexity?</h4>
+        <p>
+          When I consider which areas of Vercel's product could have the most
+          complexity I immediately think of the build step.
+        </p>
+        <p>
+          There's not much variation when it comes to configuring domains,
+          authenticating with github or toggling out-of-the-box settings on and
+          off. There's an incredible amount of variations when it comes to how
+          you build and configure web application which could lead to an
+          interesting variety of issues.
+        </p>
+        <p>
+          This is also because we're not just supporting Vercel code but
+          indirectly supporting third party libraries, frameworks and customer's
+          custom implementations.
+        </p>
+        <h4>How could I help customers overcome common problems?</h4>
+        <p>
+          I'm particularly interested in common problems, in fact I referred to
+          them as "pattern problems" in{" "}
+          <Link href={"/question/1"}>my answer to question 1</Link>. The beauty
+          of these issues is that the same solution can often be shared with
+          multiple customers at once.
+        </p>
+        <p>
+          For example, if we detect a common issue that occurs within the new
+          release of a particular framework, we could consider:
+          <p>Short term</p>
+          <ul>
+            <li>
+              Query existing open cases for keywords relating to the issue and
+              framework to quickly resolve what are essentially duplicate cases
+            </li>
+            <li>
+              Update any documentation we have on that particular framework.
+            </li>
+            <li>
+              Depending on the significance of the issue we could preemptively
+              send out comms or display an alert within the UI for customers who
+              use the framework
+            </li>
+          </ul>
+          <p>Long term</p>
+          <ul>
+            <li>
+              If the framework is opensource I could submit an issue or raise a
+              pull request to update the framework's documentation (assuming the
+              issue is not Vercel specific)
+            </li>
+            <li>
+              If there are potential enhancements to our product's UX that could
+              reduce the likelihood of the issue reoccurring I could meet with
+              the product team to discuss / raise a feature request
+            </li>
+            <li>
+              Set up filters or additional tagging within our ticketing system
+              to identify issues that likely relate to the known issue and
+              suggest a templated solution response allowing our support staff
+              to resolve these issues more quickly
+            </li>
+          </ul>
+        </p>
+      </>
+    ),
   },
   {
     id: 10,
     question: "How could we improve or alter this familiarization exercise?",
     summary: "Improving familiarization exercise",
-    answer: <p>Answer content 10</p>,
+    answer: (
+      <>
+        <p>
+          I genuinely enjoyed working on this exercise. The questions were
+          interesting and it gave me an opportunity to learn about some Next.js
+          features I hadn't used before.
+        </p>
+        <p>
+          The only thing that could make this even better would be a real
+          example problem to solve. It felt slightly awkward writing a reply for
+          a hypothetical issue in <Link href={"/question/5"}>question 5</Link>.
+          Overall a minor improvement though.
+        </p>
+        <p>
+          To be honest, I spent more than 3 hours on the task because I was
+          having fun. Keep up the great work hiring team! 😊
+        </p>
+        <p>
+          Kind regards,
+          <br />
+          Aldo Schumann
+        </p>
+        <p>
+          ✉️{" "}
+          <Link
+            href={
+              "mailto:work@aldo.io?subject=Vercel Familiarization Exercise 2023"
+            }
+          >
+            Tap here to send me an email
+          </Link>
+        </p>
+      </>
+    ),
   },
 ];
