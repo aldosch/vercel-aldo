@@ -489,7 +489,7 @@ export const questions: isQuestion[] = [
         <h3>How do I choose?</h3>
         <p>
           It depends on which stage of the request lifecycle we want to execute
-          our function as well as location specific performance needs.
+          our function at, as well as location specific performance needs.
         </p>
         <p>
           With <code>Edge Middleware</code> we could dynamically and
