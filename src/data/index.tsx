@@ -250,7 +250,11 @@ export const questions: isQuestion[] = [
           </ul>
         </p>
         <p>
-          However this can also have drawbacks:
+          Because <code>Svelte</code> has a much smaller ecosystem, it doesn't
+          enjoy these benefits of scale.
+        </p>
+        <p>
+          However scale can also have drawbacks:
           <ul>
             <li>
               Bloat
