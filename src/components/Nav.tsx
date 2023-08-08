@@ -9,7 +9,7 @@ interface Props {
 
 export default function Nav({ steps = questions, activeStep }: Props) {
   return (
-    <div className="flex flex-col flex-grow-0 px-4 py-10 overflow-y-auto bg-white gap-y-5">
+    <div className="flex-col flex-grow-0 hidden px-4 py-10 overflow-y-auto bg-white gap-y-5 md:flex">
       <Link href="/">
         <span className="text-gray-400 hover:text-gray-500">
           <HomeIcon className="flex-shrink-0 w-5 h-5" aria-hidden="true" />

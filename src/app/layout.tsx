@@ -18,7 +18,7 @@ type Props = {
 export default function RootLayout(props: Props) {
   return (
     <html lang="en" className={inter.className}>
-      <body className="flex gap-4 mx-auto w-fit">{props.children}</body>
+      <body className="flex mx-auto md:gap-4 w-fit">{props.children}</body>
     </html>
   );
 }
