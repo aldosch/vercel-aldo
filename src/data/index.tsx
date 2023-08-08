@@ -193,8 +193,11 @@ export const questions: isQuestion[] = [
         these technologies, it seemed appropriate to compare{" "}
         <code>Next.js</code> with <code>SvelteKit</code>.
         <h3>
-          I'd like some <strike>cheese with my pasta</strike> pasta with my
-          cheese
+          I'd like some{" "}
+          <span style={{ textDecoration: "line-through" }}>
+            cheese with my pasta
+          </span>{" "}
+          pasta with my cheese
         </h3>
         <p>
           Back in the day I loved making static sites with <code>Jekyll</code>.
