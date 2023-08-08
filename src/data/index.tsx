@@ -996,16 +996,6 @@ module.exports = {
           <br />
           Aldo Schumann
         </p>
-        <p>
-          ✉️{" "}
-          <Link
-            href={
-              "mailto:work@aldo.io?subject=Vercel Familiarization Exercise 2023"
-            }
-          >
-            Tap here to send me an email
-          </Link>
-        </p>
       </>
     ),
   },
