@@ -469,7 +469,7 @@ export const questions: isQuestion[] = [
         <h4>Edge Functions</h4>
         <ul>
           <li>
-            Same as a <code>Serverless Function</code> except it runs on a CND
+            Same as a <code>Serverless Function</code> except it runs on a CDN
             edge node across many regions
           </li>
           <li>Reduces latency by selecting the closest node to the user</li>
